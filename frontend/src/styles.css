@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f7f9;
+  color: #1f2937;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 24px 40px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header p {
+  margin: 6px 0 0;
+  color: #6b7280;
+}
+
+.container {
+  width: min(1000px, calc(100% - 40px));
+  margin: 40px auto;
+}
+
+.section {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.section-header p,
+.call-section p {
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+.kb-form {
+  margin-top: 24px;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #6b7280;
+}
+
+textarea {
+  margin-top: 12px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: #111827;
+  color: white;
+}
+
+button.secondary {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.entries {
+  margin-top: 30px;
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.entry-content {
+  flex: 1;
+}
+
+.entry h3 {
+  margin: 0 0 8px;
+}
+
+.entry p {
+  margin: 0;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.entry-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+.empty {
+  padding: 30px;
+  text-align: center;
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
+}
+
+.call-section {
+  margin-top: 24px;
+}
+
+.call-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.call-form input {
+  flex: 1;
+}
+
+.call-button {
+  min-width: 100px;
+}
