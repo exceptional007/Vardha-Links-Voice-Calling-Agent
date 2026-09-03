@@ -90,7 +90,7 @@ export default function CallHistory() {
             <audio
               className="recording-player"
               controls
-              src={`http://localhost:8000/calls/${selectedCall.id}/recording`}
+              src={`${import.meta.env.VITE_API_URL}/calls/${selectedCall.id}/recording`}
             />
           ) : (
             <p>Recording not available.</p>
