@@ -78,7 +78,7 @@ async def media_stream(websocket: WebSocket):
 
     try:
         async with deepgram_client.listen.v1.connect(
-            model="nova-3",
+            model="nova-2-phonecall",
             language="en-US",
             encoding="mulaw",
             sample_rate=8000,
