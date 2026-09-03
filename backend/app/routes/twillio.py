@@ -1,4 +1,4 @@
-import asyncio, json, base64
+import asyncio, json, base64, os
 
 from fastapi import APIRouter, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
@@ -43,10 +43,17 @@ async def voice_webhook():
         "This is a test call. Thank you for answering."
     )
     
+    base_url = os.getenv("PUBLIC_BASE_URL")
+    
+    if not base_url:
+        raise ValueError("PUBLIC_BASE_URL is not set")
+    
+    ws_url = base_url.replace("https://", "wss://")
+    
     connect = Connect()
     
     stream = Stream(
-        url="wss://powdered-deeply-chute.ngrok-free.dev/twilio/media-stream"
+        url=f"{ws_url}/twilio/media-stream"
     )
 
     connect.append(stream)
