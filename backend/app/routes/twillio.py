@@ -1,15 +1,10 @@
-import asyncio, json, base64, os
+import asyncio, json, base64, os, audioop
 
 from fastapi import APIRouter, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 from sqlalchemy.orm import Session
 from twilio.twiml.voice_response import VoiceResponse, Connect, Stream
 from twilio.rest import Client as TwilioClient
-
-try:
-    import audioop
-except ImportError:
-    import audioop_lts as audioop
 
 from ..database import SessionLocal
 from ..models import Call
