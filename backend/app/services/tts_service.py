@@ -1,41 +1,65 @@
 import os
 
 from dotenv import load_dotenv
-from elevenlabs.client import ElevenLabs
+from openai import OpenAI
+
+try:
+    import audioop
+except ImportError:
+    import audioop_lts as audioop
 
 load_dotenv()
 
-ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID")
-
-if not ELEVENLABS_API_KEY:
-    raise ValueError("ELEVENLABS_API_KEY is not set")
-
-if not ELEVENLABS_VOICE_ID:
-    raise ValueError("ELEVENLABS_VOICE_ID is not set")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY_VARDHA")
 
 
-client = ElevenLabs(
-    api_key=ELEVENLABS_API_KEY
-)
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY is not set")
+
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 
 def text_to_speech(text: str) -> bytes:
-    """
-    Convert text into 8 kHz μ-law audio suitable for Twilio.
-    """
 
-    audio_stream = client.text_to_speech.convert(
-        voice_id=ELEVENLABS_VOICE_ID,
-        text=text,
-        model_id="eleven_flash_v2_5",
-        output_format="ulaw_8000",
+    text = text.strip()
+
+    if not text:
+        return b""
+
+    response = client.audio.speech.create(
+        model="gpt-4o-mini-tts",
+        voice="marin",
+        input=text,
+        response_format="pcm",
+        instructions="""
+        Speak with a natural, professional Indian English accent.
+        Use a warm and confident business-call tone.
+        For Hindi, use natural Indian Hindi pronunciation.
+        For Hinglish, naturally mix Hindi and English.
+        Speak clearly and conversationally, not like a voice announcement.
+        """
     )
 
-    audio_chunks = []
+    pcm_audio = response.read()
 
-    for chunk in audio_stream:
-        if chunk:
-            audio_chunks.append(chunk)
+    return pcm_to_mulaw_8khz(pcm_audio)
 
-    return b"".join(audio_chunks)
+
+def pcm_to_mulaw_8khz(pcm_audio: bytes) -> bytes:
+
+    pcm_8khz, _ = audioop.ratecv(
+        pcm_audio,
+        2,      # sample width: 16-bit
+        1,      # mono
+        24000,  # input sample rate
+        8000,   # output sample rate
+        None,
+    )
+
+    # PCM -> mu-law
+    mulaw_audio = audioop.lin2ulaw(
+        pcm_8khz,
+        2,
+    )
+
+    return mulaw_audio

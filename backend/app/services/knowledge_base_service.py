@@ -10,7 +10,6 @@ def get_selected_knowledge_base_text(db: Session) -> str:
         .first()
     )
 
-    # No setting → use all Knowledge Bases
     if not setting or setting.knowledge_base_scope == "all":
         entries = (
             db.query(KnowledgeBase)
@@ -36,3 +35,19 @@ def get_selected_knowledge_base_text(db: Session) -> str:
         f"{entry.title}\n{entry.content}"
         for entry in entries
     )
+    
+
+def get_selected_knowledge_base(db):
+    setting = db.query(AppSetting).filter(AppSetting.id == 1).first()
+
+    if not setting:
+        return None
+
+    if setting.knowledge_base_scope == "single":
+        return (
+            db.query(KnowledgeBase)
+            .filter(KnowledgeBase.id == setting.knowledge_base_id)
+            .first()
+        )
+
+    return None
