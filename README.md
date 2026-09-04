@@ -13,7 +13,7 @@
 
 > 🔗 **Live App:** [https://vardha-links-voice-calling-agent.vercel.app](https://vardha-links-voice-calling-agent.vercel.app)
 
-> 📹 **Demo Video:** [Watch the demo video]([DEMO_VIDEO_LINK_HERE](https://youtu.be/yVIfLpLRI9Q))
+> 📹 **Demo Video:** [Watch the demo video](https://youtu.be/yVIfLpLRI9Q)
 
 ---
 
