@@ -1,7 +1,9 @@
-import os, audioop
+import os
 
 from dotenv import load_dotenv
 from openai import OpenAI
+
+import audioop_lts as audioop
 
 load_dotenv()
 

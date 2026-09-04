@@ -1,4 +1,5 @@
-import asyncio, json, base64, os, audioop
+import asyncio, json, base64, os
+import audioop_lts as audioop
 
 from fastapi import APIRouter, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
